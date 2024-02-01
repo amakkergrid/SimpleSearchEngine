@@ -1,41 +1,26 @@
 import java.util.*;
-import java.util.stream.Stream;
 
-public class Stage2 {
+public class Stage2{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter the number of people:");
-        int n = sc.nextInt();
+        int numberOfPeople = sc.nextInt();
         sc.nextLine();
-//        String[] li = s.split(" ");
-//        Optional<Integer> op = Stream.iterate(0,idx->idx+1).limit(li.length).filter(idx->w.equals(li[idx])).findFirst();
-//        op.ifPresentOrElse((idx->System.out.println(idx+1)),()->System.out.println("Not Found"));
-//        boolean flag = false;
-//        int i = 1;
-//        for(String ele:li){
-//            if(ele.equals(w)){
-//                flag = true;
-//                break;
-//            }
-//            i++;
-//        }
-//        if(flag)System.out.println(i);
-//        else System.out.println("Not found");
-        List<String>arr = new ArrayList<>();
+        List<String> listOfPeople = new ArrayList<>();
         System.out.println("Enter all people:");
-        while(n!=0){
+        while(numberOfPeople!=0){
             String s = sc.nextLine();
-            arr.add(s);
-            n--;
+            listOfPeople.add(s);
+            numberOfPeople--;
         }
         System.out.println("Enter the number of search queries:");
-        int m = sc.nextInt();
+        int numberOfQueries = sc.nextInt();
         sc.nextLine();
-        while(m!=0){
+        while(numberOfQueries!=0){
             List<String>ans = new ArrayList<>();
             System.out.println("Enter data to search people:");
             String k = sc.nextLine();
-            for(String ele:arr){
+            for(String ele : listOfPeople){
                 String low = ele.toLowerCase();
                 String kLow = k.toLowerCase();
                 int len = kLow.length();
@@ -47,14 +32,14 @@ public class Stage2 {
                 }
 
             }
-            if(ans.size()==0){
+            if(ans.isEmpty()){
                 System.out.println("No matching people found.");
             }
             else{
                 System.out.println("Found people:");
                 ans.forEach(System.out::println);
             }
-            m--;
+            numberOfQueries--;
             ans.clear();
         }
 
