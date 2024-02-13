@@ -3,16 +3,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Stage6{
+public class Stage6 {
 
     public static String readFile(String path) throws IOException{
         return new String(Files.readAllBytes(Paths.get(path)));
     }
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         String fileName = args[1];
-        String txt = readFile(fileName);
-        String[] inputText = txt.split("\n");
+        String fileInText = readFile(fileName);
+        String[] inputText = fileInText.split("\n");
         List<String> listOfPeople = Arrays.stream(inputText).toList();
         Map<String,ArrayList<Integer>> mapOfIndex = new HashMap<>();
         for(int i=0;i<listOfPeople.size();i++){
@@ -30,8 +30,8 @@ public class Stage6{
             System.out.println("1. Find a person");
             System.out.println("2. Print all people");
             System.out.println("0. Exit");
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = scanner.nextInt();
+            scanner.nextLine();
             switch(choice){
                 case 0:
                     System.out.println("Bye!");
@@ -39,17 +39,17 @@ public class Stage6{
                     break;
                 case 1:
                     System.out.println("Select a matching strategy: ALL, ANY, NONE");
-                    String strategy = sc.nextLine();
+                    String strategy = scanner.nextLine();
                     System.out.println("Enter a name or email to search all suitable people.");
-                    String query = sc.nextLine();
-                    String[] qWord = query.split(" ");
+                    String query = scanner.nextLine();
+                    String[] queryWord = query.split(" ");
                     Set<Integer> ansSet = new HashSet<>();
                     if(strategy.equals("ANY") || strategy.equals("NONE")){
                         Set<Integer> tempAns = new HashSet<>();
-                        for(var each:qWord){
-                            each = each.toLowerCase();
-                            if(mapOfIndex.get(each)!=null){
-                                tempAns.addAll(mapOfIndex.get(each));
+                        for(var eachQuery:queryWord){
+                            eachQuery = eachQuery.toLowerCase();
+                            if(mapOfIndex.get(eachQuery)!=null){
+                                tempAns.addAll(mapOfIndex.get(eachQuery));
                             }
                         }
                         if(strategy.equals("NONE")){
@@ -65,16 +65,16 @@ public class Stage6{
                     }
                     else{
                         boolean firstMove = true;
-                        for(String w : qWord){
-                            w = w.toLowerCase();
-                            if(mapOfIndex.get(w) == null) continue;
+                        for(String eachQuery : queryWord){
+                            eachQuery = eachQuery.toLowerCase();
+                            if(mapOfIndex.get(eachQuery) == null) continue;
                             if(firstMove){
                                 firstMove = false;
-                                ansSet.addAll(mapOfIndex.get(w));
+                                ansSet.addAll(mapOfIndex.get(eachQuery));
                             }
                             else{
                                 Set<Integer> f = new HashSet<>();
-                                for(int val : mapOfIndex.get(w)){
+                                for(int val : mapOfIndex.get(eachQuery)){
                                     if(ansSet.contains(val)){
                                         f.add(val);
                                     }
